@@ -1,0 +1,6 @@
+.env
+*.exe
+azurebank
+terraform/.terraform/
+terraform/terraform.tfstate*
+terraform/.terraform.lock.hcl
