@@ -2,7 +2,7 @@ AzureBank: Cloud-Native Retail Banking API
 ## Status: Active Development
 
 ## Core Philosophy
-A production-grade banking REST API built to demonstrate cloud-native development practices —
+A production-grade banking REST API built to demonstrate cloud-native development practices -
 infrastructure as code, automated CI/CD pipelines, and secrets management on Microsoft Azure.
 The focus is on deployment correctness and operational reliability rather than complex financial domain logic.
 
@@ -27,10 +27,10 @@ AzureBank/
 └── docker-compose.yml  # Local dev with Postgres
 
 ## Azure Infrastructure
-- App Service        — runs the containerized Go API
-- Container Registry — stores Docker images
-- PostgreSQL         — flexible server
-- Key Vault          — JWT secret, database credentials
+- App Service        - runs the containerized Go API
+- Container Registry - stores Docker images
+- PostgreSQL         - flexible server
+- Key Vault          - JWT secret, database credentials
 
 ### In Progress
 - Terraform provisioning (App Service, ACR, PostgreSQL, Key Vault)
@@ -43,4 +43,3 @@ AzureBank/
 - golang-migrate integration
 
 ## References and Documentation
-...
