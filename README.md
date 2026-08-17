@@ -14,6 +14,7 @@ AzureBank provides a retail banking backend with:
 - Fully automated CI/CD pipeline from commit to live deployment
 
 ## Project Structure
+
 AzureBank/
 ├── cmd/api/        # Entrypoint
 ├── internal/
