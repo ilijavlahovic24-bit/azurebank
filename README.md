@@ -14,7 +14,7 @@ AzureBank provides a retail banking backend with:
 - Fully automated CI/CD pipeline from commit to live deployment
 
 ## Project Structure
-
+```
 AzureBank/
 ├── cmd/api/        # Entrypoint
 ├── internal/
@@ -26,7 +26,7 @@ AzureBank/
 ├── .github/workflows/  # CI (test + lint) and CD (build + deploy)
 ├── Dockerfile
 └── docker-compose.yml  # Local dev with Postgres
-
+```
 ## Azure Infrastructure
 - App Service        - runs the containerized Go API
 - Container Registry - stores Docker images
