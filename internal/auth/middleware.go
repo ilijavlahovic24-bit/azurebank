@@ -30,3 +30,7 @@ func Middleware(jwtSecret string) func(http.Handler) http.Handler {
 		})
 	}
 }
+func UserIDFromContext(ctx context.Context) (int64, bool) {
+	id, ok := ctx.Value(UserIDKey).(int64)
+	return id, ok
+}
