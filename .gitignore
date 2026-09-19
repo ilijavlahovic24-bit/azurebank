@@ -4,3 +4,10 @@ azurebank
 terraform/.terraform/
 terraform/terraform.tfstate*
 terraform/.terraform.lock.hcl
+# Ignore the actual local environment files containing secrets
+.env
+.env.local
+.env.*.local
+
+# Do NOT ignore the example template file
+!.env.example

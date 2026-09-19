@@ -1,16 +1,24 @@
-FROM python:3.13
-WORKDIR /usr/local/app
+# ---- build stage ----
+FROM golang:1.25-alpine AS builder
 
-# Install the application dependencies
-COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
+WORKDIR /app
 
-# Copy in the source code
-COPY src ./src
+# Keširaj dependency sloj
+COPY go.mod go.sum ./
+RUN go mod download
+
+# Kopiraj izvor i build-uj
+COPY . .
+RUN CGO_ENABLED=0 GOOS=linux go build -o /out/api ./cmd/api
+
+# ---- run stage ----
+FROM alpine:3.20
+
+RUN apk add --no-cache ca-certificates
+
+WORKDIR /app
+COPY --from=builder /out/api /app/api
+
 EXPOSE 8080
-
-# Setup an app user so the container doesn't run as the root user
-RUN useradd app
-USER app
-
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080"]
+USER nobody:nobody
+ENTRYPOINT ["/app/api"]
