@@ -4,7 +4,7 @@
 
 $ErrorActionPreference = "Stop"
 
-$Base     = "http://localhost:8080"
+$Base = "https://azurebank-app-uyt35v.azurewebsites.net"
 $Email    = "test@test.com"
 $Password = "secret123"
 
