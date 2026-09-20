@@ -21,6 +21,7 @@ var (
 	ErrSameAccount       = errors.New("from and to accounts must be different")
 )
 
+// test
 type Store interface {
 	Deposit(ctx context.Context, userID, accountID, amount int64) (*Transaction, error)
 	Withdraw(ctx context.Context, userID, accountID, amount int64) (*Transaction, error)
