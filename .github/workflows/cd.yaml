@@ -26,32 +26,40 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Verify ACR exists
-        run: |
-          echo "Checking ACR: $ACR_NAME"
-          az acr show --name $ACR_NAME --query "{name:name, loginServer:loginServer, location:location}" -o table
+      # 1. Prijava na ACR (Docker)
+      - name: Login to ACR
+        uses: azure/docker-login@v2
+        with:
+          login-server: ${{ env.ACR_LOGIN_SERVER }}
+          username: ${{ secrets.ACR_USERNAME }}
+          password: ${{ secrets.ACR_PASSWORD }}
 
-      - name: Build and push image to ACR
+      # 2. Izgradnja slike na GitHub runneru
+      - name: Build Docker image
         run: |
-          az acr build \
-            --registry $ACR_NAME \
-            --image $IMAGE_NAME:${{ github.sha }} \
-            --image $IMAGE_NAME:latest \
-            --file Dockerfile \
-            .
+          docker build -t ${{ env.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:${{ github.sha }} .
+          docker tag ${{ env.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:${{ github.sha }} ${{ env.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:latest
 
+      # 3. Slanje slike u ACR
+      - name: Push image to ACR
+        run: |
+          docker push ${{ env.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+          docker push ${{ env.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:latest
+
+      # 4. Deploy na App Service
       - name: Deploy to App Service
         uses: azure/webapps-deploy@v3
         with:
           app-name: ${{ env.APP_NAME }}
           images: ${{ env.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
 
+      # 5. Provera zdravlja
       - name: Health check
         run: |
           echo "Waiting for App Service to come up..."
           sleep 30
           for i in 1 2 3 4 5; do
-            status=$(curl -s -o /dev/null -w "%{http_code}" $APP_URL/health)
+            status=$(curl -s -o /dev/null -w "%{http_code}" ${{ env.APP_URL }}/health)
             if [ "$status" = "200" ]; then
               echo "✓ Health check passed (attempt $i)"
               exit 0
