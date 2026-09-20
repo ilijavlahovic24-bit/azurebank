@@ -11,3 +11,12 @@ terraform/.terraform.lock.hcl
 
 # Do NOT ignore the example template file
 !.env.example
+
+
+# Terraform
+terraform/.terraform/
+terraform/terraform.tfstate
+terraform/terraform.tfstate.backup
+terraform/*.tfvars
+terraform/crash.log
+terraform/.terraform.tfstate.lock.info
