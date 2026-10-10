@@ -1,4 +1,7 @@
-AzureBank: Cloud-Native Retail Banking API
+# AzureBank
+
+Cloud-Native Retail Banking API
+
 ## Status: Completed
 
 ## Core Philosophy
