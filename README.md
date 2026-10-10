@@ -33,12 +33,10 @@ AzureBank/
 - PostgreSQL         - flexible server
 - Key Vault          - JWT secret, database credentials
 
-### In Progress
+### Completed
 - Terraform provisioning (App Service, ACR, PostgreSQL, Key Vault)
 - GitHub Actions CI/CD pipeline
 - Core API endpoints (accounts, transactions)
-
-### Planned
 - Managed Identity integration for Key Vault access
 - Health check endpoint + App Insights logging
 - golang-migrate integration
