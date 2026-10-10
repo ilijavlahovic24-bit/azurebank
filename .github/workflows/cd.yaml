@@ -3,6 +3,13 @@ name: CD
 on:
   push:
     branches: [main]
+    paths:
+      - 'cmd/**'
+      - 'internal/**'
+      - 'db/**'
+      - 'Dockerfile'
+      - 'go.mod'
+      - 'go.sum'
   workflow_dispatch:
 
 env:
