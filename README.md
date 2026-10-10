@@ -1,5 +1,5 @@
 AzureBank: Cloud-Native Retail Banking API
-## Status: Active Development
+## Status: Completed
 
 ## Core Philosophy
 A production-grade banking REST API built to demonstrate cloud-native development practices -
